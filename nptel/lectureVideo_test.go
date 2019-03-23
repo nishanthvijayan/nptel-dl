@@ -27,11 +27,11 @@ func Test_NewLectureVideoParses3GPLink(t *testing.T) {
 		t.Errorf("VideoID was not parsed properly")
 	}
 
-	if lectureVideo.format != "3GP" {
+	if lectureVideo.format != "3gp" {
 		t.Errorf("Format was not parsed properly")
 	}
 
-	if lectureVideo.topicName != "Basic%20Operations" {
+	if lectureVideo.topicName != "Basic Operations" {
 		t.Errorf("VideoID was not parsed properly")
 	}
 }
@@ -44,7 +44,7 @@ func Test_NewLectureVideoParsesFLVLink(t *testing.T) {
 		t.Errorf("VideoID was not parsed properly")
 	}
 
-	if lectureVideo.format != "FLV" {
+	if lectureVideo.format != "flv" {
 		t.Errorf("Format was not parsed properly")
 	}
 
