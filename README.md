@@ -51,3 +51,4 @@ Default format is MP4
 - Add info option that list all videos (option: `-info`)
 - Add option to download a specific module (option: `-module`)
 - Add option to download till a specific lecture number (option: `-end`)
+- Support for resumable downloads
