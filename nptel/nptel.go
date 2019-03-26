@@ -6,9 +6,11 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
+	pb "gopkg.in/cheggaaa/pb.v1"
 )
 
 const baseURL = "https://nptel.ac.in"
@@ -78,6 +80,22 @@ func ExtractLectureDownloadUrls(page io.Reader, format string) []string {
 	return urls
 }
 
+func ioCopyWithReporting(r io.Reader, w io.Writer, totalBytes int) error {
+	bar := pb.New(totalBytes).SetUnits(pb.U_BYTES)
+
+	bar.Format(" \u2580-- ")
+	bar.ShowSpeed = true
+
+	bar.Start()
+
+	barProxyReader := bar.NewProxyReader(r)
+	_, err := io.Copy(w, barProxyReader)
+
+	bar.Finish()
+
+	return err
+}
+
 // downloadFile saves the contents of url to destinationFilePath
 func downloadFile(url string, destinationFilepath string) error {
 	resp, err := http.Get(url)
@@ -86,14 +104,15 @@ func downloadFile(url string, destinationFilepath string) error {
 	}
 	defer resp.Body.Close()
 
+	fileSize, _ := strconv.Atoi(resp.Header.Get("Content-Length"))
+
 	out, err := os.Create(destinationFilepath)
 	if err != nil {
 		return err
 	}
 	defer out.Close()
 
-	_, err = io.Copy(out, resp.Body)
-	return err
+	return ioCopyWithReporting(resp.Body, out, fileSize)
 }
 
 func escapeSpaceInURL(url string) string {
