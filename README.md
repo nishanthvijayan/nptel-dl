@@ -8,13 +8,9 @@ A command line tool to download course videos from NPTEL
 - Support downloading in MP4, FLV & 3GP file formats (option: `-format`)
 - Start download from a specific lecture number (option: `-start`)
 
-## Installation
+## Download
 
-Requires golang to be installed.
-  
-```
-go install github.com/nishanthvijayan/nptel-dl
-```
+You can download the binaries for your machine from the [releases page](https://github.com/nishanthvijayan/nptel-dl/releases).
 
 ## Usage
 ### Help
