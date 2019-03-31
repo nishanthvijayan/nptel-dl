@@ -2,6 +2,8 @@
 
 A command line tool to download course videos from NPTEL
 
+![In Action](screenshot.png)
+
 ## Features
 
 - Download course to user requested path (option: `-dir`).
